@@ -34,7 +34,10 @@ app.MapGet("/Password", () =>
 
 app.Run();
 
-internal record Password(Guid Id, Guid UserId, string Title, string Url,
+// To make implict program class public for integration tests
+public partial class Program { }
+
+public record Password(Guid Id, Guid UserId, string Title, string Url,
     string Username, string Description, string CustomerNumber){
     public string Secret => "**********";
 }

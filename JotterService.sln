@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C09D61B-6540-49F5-83FA-84D66B4984A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.Api.Tests", "test\JotterService.Api.Tests\JotterService.Api.Tests.csproj", "{021618C6-CF91-422B-98B3-BCB1DC526562}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{577D8053-D74E-4E5A-9EC7-7D1BFC3D6C82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,12 +26,17 @@ Global
 		{D63C4F44-D967-4EC4-B8F4-9FE17A2CE982}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D63C4F44-D967-4EC4-B8F4-9FE17A2CE982}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D63C4F44-D967-4EC4-B8F4-9FE17A2CE982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021618C6-CF91-422B-98B3-BCB1DC526562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021618C6-CF91-422B-98B3-BCB1DC526562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021618C6-CF91-422B-98B3-BCB1DC526562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021618C6-CF91-422B-98B3-BCB1DC526562}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D63C4F44-D967-4EC4-B8F4-9FE17A2CE982} = {9C09D61B-6540-49F5-83FA-84D66B4984A1}
+		{021618C6-CF91-422B-98B3-BCB1DC526562} = {577D8053-D74E-4E5A-9EC7-7D1BFC3D6C82}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CCA07EEE-EB37-4B7B-B007-C31F8CF9906A}

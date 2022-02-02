@@ -12,9 +12,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C09D61B-6540-49F5-83FA-84D66B4984A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.Api.Tests", "test\JotterService.Api.Tests\JotterService.Api.Tests.csproj", "{021618C6-CF91-422B-98B3-BCB1DC526562}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JotterService.Api.Tests", "test\JotterService.Api.Tests\JotterService.Api.Tests.csproj", "{021618C6-CF91-422B-98B3-BCB1DC526562}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{577D8053-D74E-4E5A-9EC7-7D1BFC3D6C82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.Application", "src\JotterService.Application\JotterService.Application.csproj", "{8AFE154D-4532-4AA5-A55C-866094FAF795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.Infrastructure", "src\JotterService.Infrastructure\JotterService.Infrastructure.csproj", "{A0D59677-2776-46E5-9561-7D8B6CB69F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.Domain", "src\JotterService.Domain\JotterService.Domain.csproj", "{740B7C0E-FAFB-4230-8CD3-E2A6EE608916}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.Application.Tests", "test\JotterService.Application.Tests\JotterService.Application.Tests.csproj", "{A9A07CE5-34B4-42CC-A841-F958FB1156A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +38,22 @@ Global
 		{021618C6-CF91-422B-98B3-BCB1DC526562}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021618C6-CF91-422B-98B3-BCB1DC526562}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021618C6-CF91-422B-98B3-BCB1DC526562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AFE154D-4532-4AA5-A55C-866094FAF795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AFE154D-4532-4AA5-A55C-866094FAF795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AFE154D-4532-4AA5-A55C-866094FAF795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AFE154D-4532-4AA5-A55C-866094FAF795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D59677-2776-46E5-9561-7D8B6CB69F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D59677-2776-46E5-9561-7D8B6CB69F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D59677-2776-46E5-9561-7D8B6CB69F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D59677-2776-46E5-9561-7D8B6CB69F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{740B7C0E-FAFB-4230-8CD3-E2A6EE608916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{740B7C0E-FAFB-4230-8CD3-E2A6EE608916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{740B7C0E-FAFB-4230-8CD3-E2A6EE608916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{740B7C0E-FAFB-4230-8CD3-E2A6EE608916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9A07CE5-34B4-42CC-A841-F958FB1156A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9A07CE5-34B4-42CC-A841-F958FB1156A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9A07CE5-34B4-42CC-A841-F958FB1156A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9A07CE5-34B4-42CC-A841-F958FB1156A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +61,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D63C4F44-D967-4EC4-B8F4-9FE17A2CE982} = {9C09D61B-6540-49F5-83FA-84D66B4984A1}
 		{021618C6-CF91-422B-98B3-BCB1DC526562} = {577D8053-D74E-4E5A-9EC7-7D1BFC3D6C82}
+		{8AFE154D-4532-4AA5-A55C-866094FAF795} = {9C09D61B-6540-49F5-83FA-84D66B4984A1}
+		{A0D59677-2776-46E5-9561-7D8B6CB69F34} = {9C09D61B-6540-49F5-83FA-84D66B4984A1}
+		{740B7C0E-FAFB-4230-8CD3-E2A6EE608916} = {9C09D61B-6540-49F5-83FA-84D66B4984A1}
+		{A9A07CE5-34B4-42CC-A841-F958FB1156A6} = {577D8053-D74E-4E5A-9EC7-7D1BFC3D6C82}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CCA07EEE-EB37-4B7B-B007-C31F8CF9906A}

@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\JotterService.Application\JotterService.Application.csproj" />
     <ProjectReference Include="..\JotterService.Infrastructure\JotterService.Infrastructure.csproj" />
+    <ProjectReference Include="..\JotterService.SqliteMigrations\JotterService.SqliteMigrations.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using JotterService.Application.Features;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JotterService.Api;
 
@@ -6,21 +8,16 @@ namespace JotterService.Api;
 [ApiController]
 public class PasswordController : ControllerBase
 {
-    [HttpGet]
-    public IEnumerable<Password> Get()
+    private readonly ISender _sender;
+    public PasswordController(ISender sender)
     {
-        return Enumerable.Range(1, 5).Select(index =>
-            new Password
-            (
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                "Password" + index.ToString(),
-                $"https://{"Password" + index.ToString()}.com",
-                "Username" + index.ToString(),
-                "",
-                ""
-            ))
-            .ToArray();
+        _sender = sender;
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<GetPasswords.Response>> Get()
+    {
+        return await _sender.Send(new GetPasswords.Request());
     }
 
     // GET password/guid

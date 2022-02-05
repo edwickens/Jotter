@@ -1,4 +1,5 @@
 using FluentAssertions;
+using JotterService.Application.Features;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using Xunit;
 
 namespace JotterService.Api.Tests
 {
-    public class UnitTest1
+    public class GetAllPasswordsIntegrationTest
     {
         [Fact]
         public async Task GetAllPasswords_ReturnsPasswords()
@@ -26,7 +27,7 @@ namespace JotterService.Api.Tests
 
             // Act
             var response = await client.GetAsync("/Password");
-            var result = await JsonSerializer.DeserializeAsync<IEnumerable<Password>>(response.Content.ReadAsStream());
+            var result = await JsonSerializer.DeserializeAsync<IEnumerable<GetPasswords.Response>>(response.Content.ReadAsStream());
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);

@@ -15,9 +15,9 @@ public class PasswordController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<GetPasswords.Response>> Get()
+    public async Task<IEnumerable<GetAllPasswords.Response>> Get()
     {
-        return await _sender.Send(new GetPasswords.Request());
+        return await _sender.Send(new GetAllPasswords.Request());
     }
 
     // GET password/guid

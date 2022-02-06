@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JotterService.Application.Features;
 
-public class GetPasswords
+public class GetAllPasswords
 {
     public class Request : IRequest<IEnumerable<Response>>
     {

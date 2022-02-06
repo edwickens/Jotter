@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using JotterService.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using JotterService.Application;
+using JotterService.Application.Tests;
 
 namespace JotterService.Api.Tests;
 
@@ -71,7 +72,7 @@ public class GetAllPasswordsIntegrationTest
         // Act
         var response = await client.GetAsync("/Password");
         var resultString = await response.Content.ReadAsStringAsync();
-        var result = await JsonSerializer.DeserializeAsync<IEnumerable<GetPasswords.Response>>(
+        var result = await JsonSerializer.DeserializeAsync<IEnumerable<GetAllPasswords.Response>>(
             response.Content.ReadAsStream(),
             _serializerOptions);
 
@@ -79,33 +80,7 @@ public class GetAllPasswordsIntegrationTest
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         ArgumentNullException.ThrowIfNull(result);
         result.Zip(passwords.OrderBy(p=> p.Title), (r, e) => Tuple.Create(r, e))
-            .All(p=> EntityMatchesResponse(p.Item2, p.Item1)).Should().BeTrue();
+            .All(p=> AssertionHelper.EntityMatchesResponse(p.Item2, p.Item1)).Should().BeTrue();
         result.Select(r => r.Secret).Should().AllBe("**********");
-    }
-
-    private bool EntityMatchesResponse(Password entity, GetPasswords.Response response)
-    {
-        if (entity is null)
-            return false;
-        if (response is null)
-            return false;
-
-        if (!entity.Id.Equals(response.Id))
-            return false;
-        if (!entity.UserId.Equals(response.UserId))
-            return false;
-        if (entity.Url != response.Url)
-            return false;
-        if (entity.Title != response.Title)
-            return false;
-        if (entity.Description != response.Description)
-            return false;
-        if (entity.Username != response.Username)
-            return false;
-        if (entity.CustomerNumber != response.CustomerNumber)
-            return false;
-        
-
-        return true;
     }
 }

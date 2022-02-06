@@ -9,6 +9,6 @@ public class Password
     public string? Username { get; set; }
     public string? Description { get; set; }
     public string? CustomerNumber { get; set; }
-    public string Secret => "**********";
+    public string Secret { get; set; } = "**********";
 
 }

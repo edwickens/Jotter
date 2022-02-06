@@ -29,21 +29,31 @@ namespace JotterService.SqliteMigrations.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Secret")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
+                        .HasMaxLength(2000)
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
+                        .HasMaxLength(320)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Passwords");
+                    b.HasIndex("Title");
+
+                    b.HasIndex("Url");
+
+                    b.ToTable("Password", (string)null);
                 });
 #pragma warning restore 612, 618
         }

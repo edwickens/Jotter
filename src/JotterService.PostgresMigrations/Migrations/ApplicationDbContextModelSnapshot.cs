@@ -34,21 +34,31 @@ namespace JotterService.PostgresMigrations.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<string>("Secret")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<string>("Url")
-                        .HasColumnType("text");
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Username")
-                        .HasColumnType("text");
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Passwords");
+                    b.HasIndex("Title");
+
+                    b.HasIndex("Url");
+
+                    b.ToTable("Password", (string)null);
                 });
 #pragma warning restore 612, 618
         }

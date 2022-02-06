@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace JotterService.Application.Features;
 
@@ -8,8 +9,8 @@ public class GetPasswords
     {
         public Guid UserId { get; set; }
     }
-    public record Response(Guid Id, Guid UserId, string Title, string Url,
-    string Username, string Description, string CustomerNumber)
+    public record Response(Guid Id, Guid UserId, string? Title, string? Url,
+    string? Username, string? Description, string? CustomerNumber)
     {
         public string Secret => "**********";
     }
@@ -23,20 +24,22 @@ public class GetPasswords
             _context = context;
         }
 
-        public Task<IEnumerable<Response>> Handle(Request request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(Enumerable.Range(1, 5).Select(index =>
-            new Response
-            (
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                "Password" + index.ToString(),
-                $"https://{"Password" + index.ToString()}.com",
-                "Username" + index.ToString(),
-                "",
-                ""
-            ))
-                ); 
+            return await _context.Passwords
+                .OrderBy(p => p.Title)
+                .Select(p=>
+                    new Response
+                    (
+                        p.Id,
+                        p.UserId,
+                        p.Title,
+                        p.Url,
+                        p.Username,
+                        p.Description,
+                        p.CustomerNumber
+                    ))
+                .ToListAsync(cancellationToken);
         }
     }
 }

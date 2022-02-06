@@ -21,20 +21,20 @@ public class PasswordController : ControllerBase
     }
 
     // GET password/guid
-    [HttpGet("{id}")]
-    public Password Get(Guid id)
-    {
-        return new Password
-            (
-                id,
-                Guid.NewGuid(),
-                "Password" + id.ToString(),
-                $"https://{"Password" + id.ToString()}.com",
-                "Username" + id.ToString(),
-                "",
-                ""
-            );
-    }
+    //[HttpGet("{id}")]
+    //public Password Get(Guid id)
+    //{
+    //    return new Password
+    //        (
+    //            id,
+    //            Guid.NewGuid(),
+    //            "Password" + id.ToString(),
+    //            $"https://{"Password" + id.ToString()}.com",
+    //            "Username" + id.ToString(),
+    //            "",
+    //            ""
+    //        );
+    //}
 
     // POST password/
     [HttpPost]
@@ -53,11 +53,5 @@ public class PasswordController : ControllerBase
     public void Delete(int id)
     {
     }
-}
-
-public record Password(Guid Id, Guid UserId, string Title, string Url,
-string Username, string Description, string CustomerNumber)
-{
-    public string Secret => "**********";
 }
 

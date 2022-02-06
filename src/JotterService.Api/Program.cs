@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(o=> 
+    o.CustomSchemaIds(t => t.DeclaringType?.Name + "." + t.Name)
+);
 builder.Services.AddCors();
 
 builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);

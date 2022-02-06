@@ -38,8 +38,9 @@ public class PasswordController : ControllerBase
 
     // POST password/
     [HttpPost]
-    public void Post([FromBody] string value)
+    public async Task<CreatePassword.Response> Post([FromBody] CreatePassword.Request request)
     {
+        return await _sender.Send(request);
     }
 
     // PUT password/guid

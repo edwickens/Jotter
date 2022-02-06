@@ -18,7 +18,7 @@ using JotterService.Application.Tests;
 
 namespace JotterService.Api.Tests;
 
-public class GetAllPasswordsIntegrationTest
+public class GetAllPasswordsIntegrationTests
 {
     private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions() 
         { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };

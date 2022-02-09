@@ -1,7 +1,6 @@
 using FluentAssertions;
 using JotterService.Application.Features;
 using JotterService.Domain;
-using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +8,24 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using JotterService.Infrastructure;
-using Microsoft.AspNetCore.Hosting;
-using JotterService.Application;
-using JotterService.Application.Tests;
+using JotterService.Application.Tests.Tools;
+using JotterService.Infrastructure.Persistence;
+using JotterService.Api.Tests.Tools;
 
 namespace JotterService.Api.Tests;
 
 public class GetAllPasswordsIntegrationTests
 {
+    private readonly DbContextOptions _dbOptions = new SqliteOptionsFactory().GetOptions<ApplicationDbContext>();
+    private readonly ApplicationBuilder<Program, ApplicationDbContext> _appBuilder = new();
     private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions() 
         { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+
+    public GetAllPasswordsIntegrationTests()
+    {
+        _appBuilder.WithSqliteDbContext();
+    }
 
     [Fact]
     public async Task GetAllPasswords_ReturnsPasswords()
@@ -44,28 +48,13 @@ public class GetAllPasswordsIntegrationTests
 
         void Seed(ApplicationDbContext context)
         {
-            var c = context.Database.EnsureCreated();
             context.Passwords.AddRange(passwords!);
             context.SaveChanges();
         }
 
-        var application = new WebApplicationFactory<Program>()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.UseEnvironment("Testing");
-                builder.ConfigureServices(services =>
-                {
-                    services.AddDbContext<ApplicationDbContext>(options =>
-                          options.UseSqlite("DataSource=file::memory:?cache=shared"));
-                    services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
-                    using (var scope = services.BuildServiceProvider().CreateScope())
-                    {
-                        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                        Seed(dbContext);
-                    }
-                }
-                );
-            });
+        _appBuilder.WithDbContextAction(Seed);
+        
+        var application = _appBuilder.Build();
 
         var client = application.CreateClient();
 

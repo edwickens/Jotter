@@ -1,7 +1,8 @@
 using FluentAssertions;
 using JotterService.Application.Features;
+using JotterService.Application.Tests.Tools;
 using JotterService.Domain;
-using JotterService.Infrastructure;
+using JotterService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -13,14 +14,11 @@ namespace JotterService.Application.Tests;
 
 public class GetAllPasswordsTests
 {
-    private readonly DbContextOptions _dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseSqlite("DataSource=file::memory:")
-            .Options;
-
+    private readonly DbContextOptions _dbOptions = new SqliteOptionsFactory().GetOptions<ApplicationDbContext>();
     private readonly CancellationToken _c = CancellationToken.None;
 
     [Fact]
-    public async Task GetAllPasswords_ShouldReturnPasswordsAsync()
+    public async Task GetAllPasswords_ShouldReturnPasswords()
     {
         // Arrange
         var passwords = Enumerable.Range(1, 5).Select(index =>
@@ -38,7 +36,7 @@ public class GetAllPasswordsTests
         )
         .ToArray();
 
-        var context = new ApplicationDbContext(_dbOptions);
+        using var context = new ApplicationDbContext(_dbOptions);
         context.Database.EnsureCreated();
         await context.Passwords.AddRangeAsync(passwords, _c);
         await context.SaveChangesAsync(_c);
@@ -57,7 +55,7 @@ public class GetAllPasswordsTests
     public async Task GetAllPasswords_WhenNoPasswords_ShouldReturnEmptyList()
     {
         // Arrange
-        var context = new ApplicationDbContext(_dbOptions);
+        using var context = new ApplicationDbContext(_dbOptions);
         context.Database.EnsureCreated();
         // Act
         var uut = new GetAllPasswords.Handler(context);

@@ -1,5 +1,6 @@
 using JotterService.Application;
 using JotterService.Infrastructure;
+using JotterService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

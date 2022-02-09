@@ -1,9 +1,9 @@
-﻿using JotterService.Application;
+﻿using JotterService.Application.Interfaces;
 using JotterService.Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace JotterService.Infrastructure;
+namespace JotterService.Infrastructure.Persistence;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {

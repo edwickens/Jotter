@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JotterService.Api;
+namespace JotterService.Api.Controllers;
 
 [Route("[controller]")]
 [ApiController]

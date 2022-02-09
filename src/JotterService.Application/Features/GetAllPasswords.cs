@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using JotterService.Application.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace JotterService.Application.Features;

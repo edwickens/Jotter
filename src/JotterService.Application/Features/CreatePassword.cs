@@ -1,4 +1,5 @@
-﻿using JotterService.Domain;
+﻿using JotterService.Application.Interfaces;
+using JotterService.Domain;
 using MediatR;
 
 namespace JotterService.Application.Features;

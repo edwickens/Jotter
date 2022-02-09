@@ -1,7 +1,7 @@
 ﻿using JotterService.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace JotterService.Application;
+namespace JotterService.Application.Interfaces;
 
 public interface IApplicationDbContext
 {

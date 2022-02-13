@@ -17,9 +17,8 @@ namespace JotterService.Api.Tests;
 
 public class GetAllPasswordsIntegrationTests
 {
-    private readonly DbContextOptions _dbOptions = new SqliteOptionsFactory().GetOptions<ApplicationDbContext>();
     private readonly ApplicationBuilder<Program, ApplicationDbContext> _appBuilder = new();
-    private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions() 
+    private readonly JsonSerializerOptions _serializerOptions = new () 
         { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
     public GetAllPasswordsIntegrationTests()

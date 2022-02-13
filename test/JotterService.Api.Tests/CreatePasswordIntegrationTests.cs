@@ -17,10 +17,9 @@ namespace JotterService.Api.Tests;
 
 public class CreatePasswordIntegrationTests
 {
-    private readonly DbContextOptions _dbOptions = new SqliteOptionsFactory().GetOptions<ApplicationDbContext>();
     private readonly CancellationToken _c = CancellationToken.None;
     private readonly ApplicationBuilder<Program, ApplicationDbContext> _appBuilder = new ();
-    private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
+    private readonly JsonSerializerOptions _serializerOptions = new ()
     { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
     public CreatePasswordIntegrationTests()
@@ -60,7 +59,7 @@ public class CreatePasswordIntegrationTests
         ArgumentNullException.ThrowIfNull(result);
         AssertionHelper.EntityMatchesResponse(createdPassword, result).Should().BeTrue();
         AssertionHelper.EntityMatchesResponse(createdPassword, request).Should().BeTrue();
-        result.Secret.Should().Be("**********");
+        CreatePassword.Response.Secret.Should().Be("**********");
     }
 
 

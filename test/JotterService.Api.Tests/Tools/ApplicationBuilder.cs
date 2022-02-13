@@ -37,13 +37,11 @@ internal class ApplicationBuilder<TProgram, TContext> where TProgram : class whe
                     {
                         services.AddDbContext<TContext>(_dbOptionsFactory.GetOptionsAction());
 
-                        using (var scope = services.BuildServiceProvider().CreateScope())
-                        {
-                            var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
-                            dbContext.Database.EnsureCreated();
-                            if (_contextAction is not null)
-                                _contextAction(dbContext);
-                        }
+                        using var scope = services.BuildServiceProvider().CreateScope();
+                        var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
+                        dbContext.Database.EnsureCreated();
+                        if (_contextAction is not null)
+                            _contextAction(dbContext);
                     }
                     
                 });

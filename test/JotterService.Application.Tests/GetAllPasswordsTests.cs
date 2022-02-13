@@ -45,7 +45,7 @@ public class GetAllPasswordsTests
         var result = await uut.Handle(new GetAllPasswords.Request() { }, _c);
 
         // Assert 
-        result.Count().Should().Be(passwords.Count());
+        result.Count().Should().Be(passwords.Length);
         result.Zip(passwords.OrderBy(p => p.Title), (r, e) => Tuple.Create(r, e))
             .All(p => AssertionHelper.EntityMatchesResponse(p.Item2, p.Item1)).Should().BeTrue();
         result.Select(r => r.Secret).Should().AllBe("**********");

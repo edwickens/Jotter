@@ -21,38 +21,32 @@ public class PasswordController : ControllerBase
     }
 
     // GET password/guid
-    //[HttpGet("{id}")]
-    //public Password Get(Guid id)
-    //{
-    //    return new Password
-    //        (
-    //            id,
-    //            Guid.NewGuid(),
-    //            "Password" + id.ToString(),
-    //            $"https://{"Password" + id.ToString()}.com",
-    //            "Username" + id.ToString(),
-    //            "",
-    //            ""
-    //        );
-    //}
+    [HttpGet("{id}")]
+    public Task Get(Guid id)
+    {
+        throw new NotImplementedException();
+    }
 
     // POST password/
     [HttpPost]
-    public async Task<CreatePassword.Response> Post([FromBody] CreatePassword.Request request)
+    public async Task<CreatePassword.Response> CreatePassword([FromBody] CreatePassword.Request request)
     {
         return await _sender.Send(request);
     }
 
     // PUT password/guid
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public Task<CreatePassword.Response> UpdatePassword(Guid id, [FromBody] CreatePassword.Request request)
     {
+        throw new NotImplementedException($"{id} + {request}");
+
     }
 
     // DELETE password/guid
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public Task DeletePassword(Guid id)
     {
+        throw new NotImplementedException();
     }
 }
 

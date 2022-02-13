@@ -40,7 +40,7 @@ public class CreatePasswordTests
         ArgumentNullException.ThrowIfNull(password);
         AssertionHelper.EntityMatchesResponse(password, result).Should().BeTrue();
         AssertionHelper.EntityMatchesResponse(password, request).Should().BeTrue();
-        result.Secret.Should().Be("**********");
+        CreatePassword.Response.Secret.Should().Be("**********");
     }
 
 

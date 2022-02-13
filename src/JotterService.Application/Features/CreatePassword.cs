@@ -23,7 +23,7 @@ public class CreatePassword
     public record Response(Guid Id, Guid UserId, string? Title, string? Url,
     string? Username, string? Description, string? CustomerNumber)
     {
-        public string Secret => "**********";
+        public static string Secret => "**********";
     }
 
     public class Handler : IRequestHandler<Request, Response>
@@ -37,6 +37,7 @@ public class CreatePassword
 
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
+            // TODO: use automapper? 
             var password = new Password {
                 UserId = request.UserId,
                 Title = request.Title,

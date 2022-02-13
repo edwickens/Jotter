@@ -10,7 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './shared/header.component';
 import { PasswordEditorComponent } from './password-editor/password-editor.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     MatTableModule,
     HttpClientModule,
+    ReactiveFormsModule,
     SharedModule
   ],
   providers: [],

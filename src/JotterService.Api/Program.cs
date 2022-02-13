@@ -25,7 +25,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
-app.UseCors(options => options.WithOrigins("http://localhost:4200"));
+app.UseCors(options => options.WithOrigins("http://localhost:4200")
+    .WithHeaders("Content-Type"));
 
 if (app.Environment.IsDevelopment())
 {

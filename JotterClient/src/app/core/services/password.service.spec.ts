@@ -1,12 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { PasswordService } from './password.service';
 
-describe('PasswordServiceService', () => {
+describe('PasswordService', () => {
   let service: PasswordService;
+  const spy = jasmine.createSpyObj('HttpClient', ['get']);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: HttpClient, useValue: spy }
+      ]    });
     service = TestBed.inject(PasswordService);
   });
 

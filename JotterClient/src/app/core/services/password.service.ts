@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.prod';
-import { Password } from '../interfaces/password';
+import { environment } from '../../../environments/environment.prod';
+import { Password } from '../../interfaces/password';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ import { Password } from '../interfaces/password';
 export class PasswordService {
   constructor(private http: HttpClient) { }
 
-  apiBaseUrl: string = environment.apiBaseUrl;
-  passwordsUrl: string = "/Password";
+  private apiBaseUrl: string = environment.apiBaseUrl;
+  private passwordsUrl: string = "/Password";
 
   getPasswords() {
     return this.http.get<Password[]>(this.apiBaseUrl + this.passwordsUrl);

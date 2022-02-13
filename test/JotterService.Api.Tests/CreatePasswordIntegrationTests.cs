@@ -48,19 +48,18 @@ public class CreatePasswordIntegrationTests
         // Act
         var response = await client.PostAsync("/Password", 
             new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json") );
-        var resultString = await response.Content.ReadAsStringAsync();
         var result = await JsonSerializer.DeserializeAsync<CreatePassword.Response>(
             response.Content.ReadAsStream(),
             _serializerOptions);
 
         using var scope = app.Services.CreateScope();
         using var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var password = await context.Passwords.SingleOrDefaultAsync(_c);
+        var createdPassword = await context.Passwords.SingleOrDefaultAsync(_c);
         // Assert
-        ArgumentNullException.ThrowIfNull(password);
+        ArgumentNullException.ThrowIfNull(createdPassword);
         ArgumentNullException.ThrowIfNull(result);
-        AssertionHelper.EntityMatchesResponse(password, result).Should().BeTrue();
-        AssertionHelper.EntityMatchesResponse(password, request).Should().BeTrue();
+        AssertionHelper.EntityMatchesResponse(createdPassword, result).Should().BeTrue();
+        AssertionHelper.EntityMatchesResponse(createdPassword, request).Should().BeTrue();
         result.Secret.Should().Be("**********");
     }
 

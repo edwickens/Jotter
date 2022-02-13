@@ -6,12 +6,20 @@ namespace JotterService.Application.Tests.Tools;
 
 public class SqliteOptionsFactory : DbOptionsFactory
 {
+    private readonly SqliteConnection connection = new ($"Data Source=file:{Guid.NewGuid()}?mode=memory");
     public override DbContextOptions GetOptions<TContext>()
     {
-        var connection = new SqliteConnection($"Data Source=file:{Guid.NewGuid()}?mode=memory");
-        connection.Open();
-        return new DbContextOptionsBuilder<TContext>()
-            .UseSqlite(connection)
-            .Options;
+        var optionsBuilder = new DbContextOptionsBuilder<TContext>();
+        GetOptionsAction().Invoke(optionsBuilder);
+        return optionsBuilder.Options;
+    }
+
+    public override Action<DbContextOptionsBuilder> GetOptionsAction()
+    {
+        return new Action<DbContextOptionsBuilder>(options =>
+        {
+            connection.Open();
+            options.UseSqlite(connection);
+        });        
     }
 }

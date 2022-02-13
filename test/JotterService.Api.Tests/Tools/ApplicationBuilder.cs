@@ -10,13 +10,12 @@ namespace JotterService.Api.Tests.Tools;
 
 internal class ApplicationBuilder<TProgram, TContext> where TProgram : class where TContext : DbContext
 {
-    private DbContextOptions? _dbOptions;
+    private DbOptionsFactory? _dbOptionsFactory;
     private Action<TContext>? _contextAction;
 
-    //TODO: get dbContext type from WithSqliteDbContext method
     public ApplicationBuilder<TProgram, TContext> WithSqliteDbContext() 
     {
-        _dbOptions = new SqliteOptionsFactory().GetOptions<TContext>();
+        _dbOptionsFactory = new SqliteOptionsFactory();
         return this;
     }
 
@@ -34,20 +33,13 @@ internal class ApplicationBuilder<TProgram, TContext> where TProgram : class whe
                 builder.UseEnvironment("Testing");
                 builder.ConfigureServices(services =>
                 {
-                    if(_dbOptions is not null)
+                    if(_dbOptionsFactory is not null)
                     {
-                        var connection = new SqliteConnection($"Data Source=file:{Guid.NewGuid()}?mode=memory");
-                        //TODO: make connection string, db name configurable; make use of db options
-                        services.AddDbContext<TContext>(options =>
-                        {
-                            connection.Open();
-                            options.UseSqlite(connection);
-                        });
-                       
+                        services.AddDbContext<TContext>(_dbOptionsFactory.GetOptionsAction());
+
                         using (var scope = services.BuildServiceProvider().CreateScope())
                         {
                             var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
-                            //dbContext.Database.EnsureDeleted();
                             dbContext.Database.EnsureCreated();
                             if (_contextAction is not null)
                                 _contextAction(dbContext);

@@ -8,7 +8,6 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
-using Microsoft.EntityFrameworkCore;
 using JotterService.Application.Tests.Tools;
 using JotterService.Infrastructure.Persistence;
 using JotterService.Api.Tests.Tools;

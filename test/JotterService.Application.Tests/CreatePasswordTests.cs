@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using JotterService.Application.Features;
+using JotterService.Application.Interfaces;
 using JotterService.Application.Tests.Tools;
 using JotterService.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using NSubstitute;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ public class CreatePasswordTests
 {
     private readonly DbContextOptions _dbOptions = new SqliteOptionsFactory().GetOptions<ApplicationDbContext>();
     private readonly CancellationToken _c = CancellationToken.None;
+    private readonly IEncryptionService _encryptionService = Substitute.For<IEncryptionService>();
 
     [Fact]
     public async Task CreatePassword_ShouldCreatePassword_AndReturnCreatedPassword()
@@ -32,7 +35,7 @@ public class CreatePasswordTests
         var context = new ApplicationDbContext(_dbOptions);
         context.Database.EnsureCreated();
         // Act
-        var uut = new CreatePassword.Handler(context);
+        var uut = new CreatePassword.Handler(context, _encryptionService);
         var result = await uut.Handle(request, _c);
 
         var password = await context.Passwords.SingleOrDefaultAsync(_c);

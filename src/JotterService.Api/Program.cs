@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen(o=>
 builder.Services.AddCors();
 
 builder.Services.AddInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Configuration);
 
 var app = builder.Build();
 

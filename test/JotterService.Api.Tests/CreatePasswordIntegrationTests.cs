@@ -38,7 +38,8 @@ public class CreatePasswordIntegrationTests
             Url = $"https://Password.com",
             Username = "Username",
             Description = "Do-dee-do-do",
-            CustomerNumber = "123"
+            CustomerNumber = "123",
+            Secret = Guid.NewGuid().ToString()
         };
 
         var app = _appBuilder.Build();

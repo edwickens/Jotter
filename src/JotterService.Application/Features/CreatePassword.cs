@@ -29,23 +29,28 @@ public class CreatePassword
     public class Handler : IRequestHandler<Request, Response>
     {
         private readonly IApplicationDbContext _context;
+        IEncryptionService _encryptionService;
 
-        public Handler(IApplicationDbContext context)
+        public Handler(IApplicationDbContext context, IEncryptionService encryptionService)
         {
             _context = context;
+            _encryptionService = encryptionService;
         }
 
         public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
+            var encryptedSecret = _encryptionService.Encrypt(request.Secret);
+
             // TODO: use automapper? 
-            var password = new Password {
+            var password = new Password
+            {
                 UserId = request.UserId,
                 Title = request.Title,
                 Url = request.Url,
                 Username = request.Username,
                 Description = request.Description,
                 CustomerNumber = request.CustomerNumber,
-                Secret = request.Secret
+                Secret = encryptedSecret
             };
             await _context.Passwords.AddAsync(password, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

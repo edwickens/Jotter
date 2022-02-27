@@ -1,4 +1,4 @@
-﻿namespace JotterService.Application.Options;
+﻿namespace JotterService.Application.Configuration;
 
 public class EncryptionOptions
 {

@@ -29,7 +29,7 @@ public class CreatePassword
     public class Handler : IRequestHandler<Request, Response>
     {
         private readonly IApplicationDbContext _context;
-        IEncryptionService _encryptionService;
+        private readonly IEncryptionService _encryptionService;
 
         public Handler(IApplicationDbContext context, IEncryptionService encryptionService)
         {

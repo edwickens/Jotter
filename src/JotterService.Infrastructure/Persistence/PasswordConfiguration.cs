@@ -18,5 +18,7 @@ public class PasswordConfiguration : IEntityTypeConfiguration<Password>
 
         builder.HasIndex(p => p.Title);
 
+        builder.OwnsOne(p=> p.Secret);
+
     }
 }

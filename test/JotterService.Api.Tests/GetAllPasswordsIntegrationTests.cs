@@ -39,7 +39,7 @@ public class GetAllPasswordsIntegrationTests
              Username = "Username" + index.ToString(),
              Description = "",
              CustomerNumber = "",
-             Secret = Guid.NewGuid().ToString()
+             Secret = new CypherText(Guid.NewGuid().ToString(), new byte[0])
          }
         )
         .ToArray();

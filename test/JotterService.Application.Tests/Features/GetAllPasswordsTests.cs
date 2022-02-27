@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace JotterService.Application.Tests;
+namespace JotterService.Application.Tests.Features;
 
 public class GetAllPasswordsTests
 {
@@ -31,7 +31,7 @@ public class GetAllPasswordsTests
              Username = "Username" + index.ToString(),
              Description = "",
              CustomerNumber = "",
-             Secret = Guid.NewGuid().ToString()
+             Secret = new CypherText(Guid.NewGuid().ToString(), new byte[0])
          }
         )
         .ToArray();

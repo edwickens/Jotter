@@ -29,10 +29,6 @@ namespace JotterService.SqliteMigrations.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Secret")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
@@ -54,6 +50,33 @@ namespace JotterService.SqliteMigrations.Migrations
                     b.HasIndex("Url");
 
                     b.ToTable("Password", (string)null);
+                });
+
+            modelBuilder.Entity("JotterService.Domain.Password", b =>
+                {
+                    b.OwnsOne("JotterService.Domain.CypherText", "Secret", b1 =>
+                        {
+                            b1.Property<Guid>("PasswordId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<byte[]>("Iv")
+                                .IsRequired()
+                                .HasColumnType("BLOB");
+
+                            b1.Property<string>("Text")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("PasswordId");
+
+                            b1.ToTable("Password");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PasswordId");
+                        });
+
+                    b.Navigation("Secret")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

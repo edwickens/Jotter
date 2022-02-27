@@ -15,28 +15,31 @@ public class PasswordController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<GetAllPasswords.Response>> Get()
+    public async Task<IActionResult> Get()
     {
-        return await _sender.Send(new GetAllPasswords.Request());
-    }
-
-    // GET password/guid
-    [HttpGet("{id}")]
-    public Task Get(Guid id)
-    {
-        throw new NotImplementedException();
+        var response = await _sender.Send(new GetAllPasswords.Request());
+        return Ok(response);
     }
 
     // POST password/
     [HttpPost]
-    public async Task<CreatePassword.Response> CreatePassword([FromBody] CreatePassword.Request request)
+    public async Task<IActionResult> CreatePassword([FromBody] CreatePassword.Request request)
     {
-        return await _sender.Send(request);
+        var response = await _sender.Send(request);
+        return Ok(response);
+    }
+
+    // GET password/guid
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        var response = await _sender.Send( new GetPassword.Request() { PasswordId = id});
+        return Ok(response);
     }
 
     // PUT password/guid
     [HttpPut("{id}")]
-    public Task<CreatePassword.Response> UpdatePassword(Guid id, [FromBody] CreatePassword.Request request)
+    public Task<IActionResult> UpdatePassword(Guid id, [FromBody] CreatePassword.Request request)
     {
         throw new NotImplementedException($"{id} + {request}");
 

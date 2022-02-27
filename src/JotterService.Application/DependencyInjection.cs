@@ -1,5 +1,5 @@
 ﻿using JotterService.Application.Interfaces;
-using JotterService.Application.Options;
+using JotterService.Application.Configuration;
 using JotterService.Application.Services;
 using MediatR;
 using Microsoft.Extensions.Configuration;

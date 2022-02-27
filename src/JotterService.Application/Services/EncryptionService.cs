@@ -1,11 +1,12 @@
 ﻿using JotterService.Application.Interfaces;
-using JotterService.Application.Options;
+using JotterService.Application.Configuration;
+using JotterService.Domain;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 
 namespace JotterService.Application.Services;
 
-internal class EncryptionService : IEncryptionService
+public class EncryptionService : IEncryptionService
 {
     private readonly EncryptionOptions _options;
 
@@ -14,14 +15,14 @@ internal class EncryptionService : IEncryptionService
         _options = options.Value;
     }
 
-    public string Encrypt(string plaintext)
+    public CypherText Encrypt(string plaintext)
     {
         ArgumentNullException.ThrowIfNull(_options.Key);
-
+        byte[] iv; 
         string encryptedSecret;
         using (Aes aes = Aes.Create())
         {
-            aes.GenerateIV();
+            iv = aes.IV;
             aes.Key = Convert.FromBase64String(_options.Key);
             using MemoryStream encryptedSecretStream = new();
 
@@ -37,6 +38,32 @@ internal class EncryptionService : IEncryptionService
             encryptedSecret = Convert.ToBase64String(encrypted);
         }
 
-        return encryptedSecret;
+        return new CypherText(encryptedSecret, iv);
     }
+
+    public string Decrypt(CypherText cypherText)
+    {
+        ArgumentNullException.ThrowIfNull(_options.Key);
+        string? plaintext = null; 
+        using (Aes aes = Aes.Create())
+        {
+            aes.Key = Convert.FromBase64String(_options.Key);
+            aes.IV = cypherText.Iv;
+            byte[] cypher = Convert.FromBase64String(cypherText.Text);
+            using MemoryStream encryptedSecretStream = new(cypher);
+
+            using CryptoStream cryptoStream = new(
+                encryptedSecretStream,
+                aes.CreateDecryptor(),
+                CryptoStreamMode.Read);
+            using (StreamReader encryptReader = new(cryptoStream))
+            {
+                plaintext = encryptReader.ReadToEnd();
+            }
+        }
+        ArgumentNullException.ThrowIfNull(plaintext);
+
+        return plaintext;
+    }
+
 }

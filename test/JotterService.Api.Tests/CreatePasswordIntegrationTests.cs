@@ -62,7 +62,4 @@ public class CreatePasswordIntegrationTests
         AssertionHelper.EntityMatchesResponse(createdPassword, request).Should().BeTrue();
         CreatePassword.Response.Secret.Should().Be("**********");
     }
-
-
-
 }

@@ -31,7 +31,7 @@ public class GetAllPasswordsTests
              Username = "Username" + index.ToString(),
              Description = "",
              CustomerNumber = "",
-             Secret = new CypherText(Guid.NewGuid().ToString(), new byte[0])
+             Secret = new CypherText(Guid.NewGuid().ToString(), Array.Empty<byte>())
          }
         )
         .ToArray();

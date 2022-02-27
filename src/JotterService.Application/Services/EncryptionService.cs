@@ -56,10 +56,8 @@ public class EncryptionService : IEncryptionService
                 encryptedSecretStream,
                 aes.CreateDecryptor(),
                 CryptoStreamMode.Read);
-            using (StreamReader encryptReader = new(cryptoStream))
-            {
-                plaintext = encryptReader.ReadToEnd();
-            }
+            using StreamReader encryptReader = new(cryptoStream);
+            plaintext = encryptReader.ReadToEnd();
         }
         ArgumentNullException.ThrowIfNull(plaintext);
 

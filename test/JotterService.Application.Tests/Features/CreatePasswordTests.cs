@@ -37,7 +37,7 @@ public class CreatePasswordTests
         var context = new ApplicationDbContext(_dbOptions);
         context.Database.EnsureCreated();
 
-        _encryptionService.Encrypt(Arg.Any<string>()).Returns(new CypherText("/SECRET+/", new byte[0]));
+        _encryptionService.Encrypt(Arg.Any<string>()).Returns(new CypherText("/SECRET+/", Array.Empty<byte>()));
         // Act
         var uut = new CreatePassword.Handler(context, _encryptionService);
         var result = await uut.Handle(request, _c);

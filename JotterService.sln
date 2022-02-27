@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{637E8E10-9BFF-49E0-AE61-FE0D18FBE531}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C09D61B-6540-49F5-83FA-84D66B4984A1}"
@@ -26,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JotterService.Application.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JotterService.SqliteMigrations", "src\JotterService.SqliteMigrations\JotterService.SqliteMigrations.csproj", "{DFA2657E-1082-478C-A0B9-C36BF93BB6BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JotterService.PostgresMigrations", "src\JotterService.PostgresMigrations\JotterService.PostgresMigrations.csproj", "{70B03C28-56B1-419F-8DE1-A78A5012A54C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JotterService.PostgresMigrations", "src\JotterService.PostgresMigrations\JotterService.PostgresMigrations.csproj", "{70B03C28-56B1-419F-8DE1-A78A5012A54C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
